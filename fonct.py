@@ -25,3 +25,9 @@ def nouveauVelo(id,nom,descCourte,descLongue):
         with open("./data/inventaire.json","w") as invW:
             json.dump(inv, invW)
     
+def dispo():
+    dico2={}
+    for id in dico.keys():
+        if len(inv[id]["numeroSerie"])!=0:
+            dico2[id]=dico[id]
+    return dico2

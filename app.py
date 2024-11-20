@@ -24,7 +24,7 @@ def tout():
 
 @app.route("/dispos")
 def dispos():
-    return render_template("dispos.html")
+    return render_template("dispos.html",Lvelo = fonct.dispo())
 
 @app.route("/velo/<code>")
 def velo(code):

@@ -5,37 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disponibilité - Rou'libre</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .logo {
-            margin: 20px;
-        }
-        .logo img {
-            width: 200px;
-            height: auto;
-        }
-        .content {
-            padding: 20px;
-        }
-        .content p {
-            font-size: 1.2em;
-            color: #666;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/page.css">
 <body>
 
 <header>
@@ -49,10 +19,9 @@
 <div class="content">
     <p>Tous nos vélos disponibles (dans l'inventaire)</p>
     <ul>
-    <li>code produit, nom, descr courte</li>
-    <li><a href="/velo/123">123, VTT Rock Machin,  superbe vélo de rando</a><input type="button" name="action" value="detail"/><input type="button" name="action" value="achat"/></li>
-    <li><a href="/velo/156">156, Vélo Barbie 14 pouces,  idéal pour petite fille avec ses dessins colorés</a><input type="button" name="action" value="detail"/><input type="button" name="action" value="achat"/></li>
-   
+        {% for velo in Lvelo.keys() %}
+        <li>{{velo}} , {{Lvelo[velo]["nom"]}} , {{Lvelo[velo]["descCourte"]}} <input type="button" onclick="window.location.href = '/velo/{{velo}}' "; value="à propos"/></li>
+        {% endfor %}
     </ul>
 
     <p><a href="home">Retour à l'accueil</a></p>
