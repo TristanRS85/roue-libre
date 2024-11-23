@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilité - Rou'libre</title>
+    <link rel="stylesheet" href="/static/page.css">
+<body>
+
+<header>
+    <h1>Rou'libre</h1>
+</header>
+
+<div class="logo">
+    <img src="/static/images/logo.png" alt="Logo de Vélos Passion">
+</div>
+
+<div class="content">
+    <form action="/envoieAchat/{{velo}}" method="POST">
+        <h1>Formulaire d'achat de vélo</h1>
+        
+        <label for="nom">Nom complet :</label>
+        <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        
+        <label for="email">Adresse email :</label>
+        <input type="email" id="email" name="email" placeholder="Votre email" required>
+        
+        <label for="tel">Téléphone :</label>
+        <input type="tel" id="tel" name="tel" placeholder="Votre numéro de téléphone" required>
+
+
+        <button type="submit">Commander</button>
+    </form>
+    <p><a href="home">Retour à l'accueil</a></p>
+</div>
+
+</body>
+</html>

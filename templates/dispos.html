@@ -20,7 +20,7 @@
     <p>Tous nos vélos disponibles (dans l'inventaire)</p>
     <ul>
         {% for velo in Lvelo.keys() %}
-        <li>{{velo}} , {{Lvelo[velo]["nom"]}} , {{Lvelo[velo]["descCourte"]}} <input type="button" onclick="window.location.href = '/velo/{{velo}}' "; value="à propos"/></li>
+        <li>{{velo}} , {{Lvelo[velo]["nom"]}} , {{Lvelo[velo]["descCourte"]}} <input type="button" onclick="window.location.href = '/velo/{{velo}}' "; value="à propos"/> <input type="button" onclick="window.location.href = '/achat/{{velo}}' "; value="achat"/></li>
         {% endfor %}
     </ul>
 

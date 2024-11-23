@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 import json
 import fonct
 
@@ -30,6 +30,18 @@ def dispos():
 def velo(code):
     return render_template("velo.html", velo = dico[code])
 
+@app.route("/achat/<code>")
+def achat(code):
+    return render_template("achat.html",velo = code)
+
+@app.route("/envoieAchat/<velo>", methods=["POST"])
+def formuAchat(velo):
+    numSerie = fonct.retirerVelo(velo)
+    nom = request.form.get("nom")
+    email = request.form.get("email")
+    tel = request.form.get("tel")
+    fonct.ajoutVente(velo,numSerie,nom,email,tel)
+    return render_template("home.html")
 
 if __name__=="__main__":
     app.run(debug=True)

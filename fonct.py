@@ -6,6 +6,9 @@ with open("./data/catalogue.json","r") as cataR:
 with open("./data/inventaire.json","r") as invR:
     inv =  json.load(invR)
 
+with open("./data/vente.json","r") as venteR:
+    vente =  json.load(venteR)
+
 def nouveauVelo(id,nom,descCourte,descLongue):
     if id not in dico.keys():
         dico[id]={}
@@ -31,3 +34,19 @@ def dispo():
         if len(inv[id]["numeroSerie"])!=0:
             dico2[id]=dico[id]
     return dico2
+
+def retirerVelo(id):
+    res = inv[id]["numeroSerie"][0]
+    inv[id]["numeroSerie"].pop(0)
+    with open("./data/inventaire.json","w") as invW:
+            json.dump(inv, invW)
+    return res
+
+def ajoutVente(code,numSerie,nom,email,tel):
+    vente[numSerie]={}
+    vente[numSerie]["code"]=code
+    vente[numSerie]["nom"]=nom
+    vente[numSerie]["email"]=email
+    vente[numSerie]["tel"]=tel
+    with open("./data/vente.json","w") as venteW:
+            json.dump(vente, venteW)
