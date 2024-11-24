@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/page.css">
+    <title>Dashboard</title>
+    <script>
+        function ajouterVelo() {
+            const data = {
+                id: document.getElementById('id').value,
+                nom: document.getElementById('nom').value,
+                descCourte: document.getElementById('descCourte').value,
+                descLongue: document.getElementById('descLongue').value
+            };
+            
+            fetch('/ajouter-velo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.message;
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+    </script>
+</head>
+</head>
+<body>
+
+    <header>
+        <table align="center" width="100%">
+            <tr>
+                <td width="33%"><a href="/home"><img src="/static/images/home.png" alt="page accueil"></a></td>
+                <td width="33%"><h1>Rou'libre</h1></td>
+                <td width="33%"><a href="/login"><img src="/static/images/profile.png" alt="connexion"></a></td>
+            </tr>
+        </table>
+    </header>
+
+    <div class="logo">
+        <img src="/static/images/logo.png" alt="Logo de Vélos Passion">
+    </div>
+
+    <h1>Dashboard</h1>
+
+    <form onsubmit="event.preventDefault(); ajouterVelo();">
+        <label for="id">ID :</label>
+        <textarea type="text" id="id" name="id" required placeholder="Si le type de velo existe déja seul l'id est necessaire l'id doit etre de la forme XXX ou X est un entier"></textarea><br>
+        
+        <label for="nom">Nom :</label>
+        <textarea type="text" id="nom" name="nom"></textarea><br>
+        
+        <label for="descCourte">Description Courte :</label>
+        <textarea type="text" id="descCourte" name="descCourte"></textarea><br>
+        
+        <label for="descLongue">Description Longue :</label>
+        <textarea id="descLongue" name="descLongue"></textarea><br>
+        
+        <button type="submit">Ajouter Vélo</button>
+    </form>
+    <p id="result" style="margin-top: 20px; color: green;"></p>
+
+</body>
+</html>

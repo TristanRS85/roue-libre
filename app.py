@@ -1,14 +1,18 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, jsonify
 import json
 import fonct
 
 app = Flask(__name__)
+app.secret_key = "superCle"
 
 with open("./data/catalogue.json","r") as cataR:
     dico = json.load(cataR)
     
 with open("./data/inventaire.json","r") as invR:
     inv =  json.load(invR)
+
+with open("./data/utilisateur.json","r") as userR:
+    user =  json.load(userR)
 
 @app.route("/")
 def home():
@@ -42,6 +46,31 @@ def formuAchat(velo):
     tel = request.form.get("tel")
     fonct.ajoutVente(velo,numSerie,nom,email,tel)
     return render_template("home.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route('/dashboard', methods=["POST"])
+def dashboard():
+    id = request.form.get("id")
+    mdp = request.form.get("mdp")
+    if id in user and user[id] == mdp:
+        return render_template("dash.html")
+    else:
+        return render_template("home.html")
+
+@app.route('/ajouter-velo', methods=['POST'])
+def ajouter_velo():
+    data = request.json 
+    id = data.get('id')
+    nom = data.get('nom')
+    descCourte = data.get('descCourte')
+    descLongue = data.get('descLongue')
+    
+    resultat = fonct.nouveauVelo(id, nom, descCourte, descLongue)
+    
+    return jsonify({"message": resultat})
 
 if __name__=="__main__":
     app.run(debug=True)

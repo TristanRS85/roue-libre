@@ -10,23 +10,31 @@ with open("./data/vente.json","r") as venteR:
     vente =  json.load(venteR)
 
 def nouveauVelo(id,nom,descCourte,descLongue):
-    if id not in dico.keys():
-        dico[id]={}
-        dico[id]["nom"]=nom
-        dico[id]["descCourte"]=descCourte
-        dico[id]["descLongue"]=descLongue
-        with open("./data/catalogue.json","w") as cataW:
-            json.dump(dico, cataW)
-        inv[id]={}
-        inv[id]["numeroSerie"]=[id+"1"]
-        with open("./data/inventaire.json","w") as invW:
-            json.dump(inv, invW)
-    else:
+    if id in dico.keys():
         temp = inv[id]["numeroSerie"]
         temp.append(id+str(int(temp[len(temp)-1][3:])+1))
         inv[id]["numeroSerie"]= temp
         with open("./data/inventaire.json","w") as invW:
-            json.dump(inv, invW)
+            json.dump(inv, invW)  
+    else:
+        try:
+            if(id==""or nom=="" or descCourte=="" or descLongue=="" or len(id)!=3):
+                return "veuillez vérifier les champs"
+            else:
+                int(id)
+                dico[id]={}
+                dico[id]["nom"]=nom
+                dico[id]["descCourte"]=descCourte
+                dico[id]["descLongue"]=descLongue
+                with open("./data/catalogue.json","w") as cataW:
+                    json.dump(dico, cataW)
+                inv[id]={}
+                inv[id]["numeroSerie"]=[id+"1"]
+                with open("./data/inventaire.json","w") as invW:
+                    json.dump(inv, invW)
+        except:
+            return "veuillez vérifier les champs"
+    return "succès"
     
 def dispo():
     dico2={}
