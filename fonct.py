@@ -58,3 +58,6 @@ def ajoutVente(code,numSerie,nom,email,tel):
     vente[numSerie]["tel"]=tel
     with open("./data/vente.json","w") as venteW:
             json.dump(vente, venteW)
+
+if __name__=="__main__":
+    print("hi")

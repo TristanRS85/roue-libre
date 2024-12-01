@@ -17,6 +17,13 @@ header img{
     width: 20px;
     height: auto;
 }
+header table{
+    align: center;
+    width: 100%;
+}
+header tr {
+    width: 33%;
+}
 .logo {
     margin: 20px;
 }
